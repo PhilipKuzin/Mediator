@@ -1,7 +1,8 @@
 using System;
 using UnityEngine;
+using Zenject;
 
-public class Level
+public class Level : ITickable
 {
     public event Action Defeat;
     public void Start()
@@ -23,6 +24,11 @@ public class Level
         // показ панели поражения 
     }
 
-
-
+    public void Tick()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            OnDefeat();
+        }
+    }
 }

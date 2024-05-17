@@ -1,19 +1,21 @@
 using UnityEngine;
+using Zenject;
 
 public class Mediator : MonoBehaviour
 {
-    [SerializeField] private DefeatPanel _panel;
-
+    private DefeatPanel _panel;
     private Level _level;
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         _level.Defeat -= OnLevelDefeat;
     }
 
-    public void Initialize(Level level)
+    [Inject]
+    private void Construct (Level level, DefeatPanel defeatPanel)
     {
         _level = level;
+        _panel = defeatPanel;
         _level.Defeat += OnLevelDefeat;
     }
 

@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 public class PlayerMediator : MonoBehaviour
 {
@@ -17,6 +18,13 @@ public class PlayerMediator : MonoBehaviour
         _player.OnHealthChanged -= ChangeHealthView;
         _player.OnLevelChanged -= ChangeLevelView;
         _player.OnPlayerReborn -= ResetView;
+    }
+
+    [Inject]
+    private void Construct (Player player, PlayerPanel playerPanel)
+    {
+        _player = player;
+        _playerPanel = playerPanel;
     }
 
     private void ResetView()

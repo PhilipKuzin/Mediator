@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 public class GameplayMediator : MonoBehaviour
 {
@@ -15,6 +16,13 @@ public class GameplayMediator : MonoBehaviour
     {
         _player.Dead -= OnPlayerDead;
         _defeatPanel.OnClickRestartBtn -= Restart;
+    }
+
+    [Inject]
+    private void Construct(Player player, PanelDefeat panelDefeat)
+    {
+        _player = player;
+        _defeatPanel = panelDefeat;
     }
 
     public void Restart()
